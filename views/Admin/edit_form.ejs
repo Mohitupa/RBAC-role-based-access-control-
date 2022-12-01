@@ -1,0 +1,31 @@
+<%- include('../layouts/header') %>
+    <div style="display: flex;margin:0 5%;">
+        <div>
+            <%- include ('../layouts/admin_manu.ejs') %>
+        </div>
+        <div style="margin: 0 50px;">
+            <br>
+            <h1><span class="goback" onclick="window.history.back()">←</span> Edit User</h1>
+
+            <div class="profile">
+                <!-- <button class="buttonType" onclick="">EDIT</button> -->
+                <div style="width: 300px;">
+                    <form action="/user/update-user-info" method="post" class="manage-user-form">
+                        <input type="hidden" name="id" value="<%= person.id %>" />
+                        <div class="w3-section">
+                            <p class="title">Edit Email/username</p>
+                            <input type="email" class="w3-input w3-border w3-hover-border-black" style="width:100%;"
+                                type="email" name="email" value="<%= person.email %>" required>
+                        </div>
+                        <input class="w3-button w3-block w3-black" type="submit" value="Save">
+                    </form>
+                </div>
+                <div>
+                    <p class="title">User object</p>
+                    <pre class="subtitle"><%= person %></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%- include('../layouts/footer') %>

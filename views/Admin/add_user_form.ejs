@@ -1,0 +1,38 @@
+<%- include('../layouts/header') %>
+    <div style="display: flex;margin:0 5%;">
+        <div>
+            <%- include ('../layouts/admin_manu.ejs') %>
+        </div>
+        <div style="margin: 0 50px;">
+            <br>
+            <h1><span class="goback" onclick="window.history.back()">←</span> Add User</h1>
+
+            <div class="profile">
+                <div>
+                    <div class="w3-content">
+                        <form class="w3-container" action="/admin/add-user" method="post">
+                            <div class="w3-section">
+                                <label>Email/Username</label>
+                                <input class="w3-input w3-border w3-hover-border-black" style="width:100%;" type="text"
+                                    name="email" id="email" value="<%= locals.email ? email : '' %>">
+                            </div>
+                            <div class="w3-section">
+                                <label>Password</label>
+                                <input type="password" class="w3-input w3-border w3-hover-border-black"
+                                    style="width:100%;" name="password" id="password">
+                            </div>
+                            <div class="w3-section">
+                                <label>Confirm Password</label>
+                                <input type="password" class="w3-input w3-border w3-hover-border-black"
+                                    style="width:100%;" name="password2" id="password2">
+                            </div>
+                            <button type="submit" class="w3-button w3-block w3-black" value="Register">ADD</button>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%- include('../layouts/footer') %>

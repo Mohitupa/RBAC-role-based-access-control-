@@ -1,40 +1,45 @@
 <%- include ('layouts/header') %>
-    <div style="margin:50px;text-align: center;">
 
-        <h1 class="table">Manage Users</h1>
+    <div style="display: flex;margin:0 5%;">
+        <div>
+            <%- include ('layouts/admin_manu.ejs') %>
+        </div>
+        <div style="width: 70%;margin:0 50px;text-align: center;">
+            <h1 class="table">Assign Roles</h1>
 
-        <table class="table" style="margin: 0 auto;">
-            <thead>
-                <th>id</th>
-                <th>email</th>
-                <th>role</th>
-            </thead>
-            <tbody>
-                <% users.forEach(user=> { %>
-                    <tr>
-                        <td>
-                            <%= user.id %>
-                        </td>
-                        <td><a href="/admin/user/<%= user.id %>">
-                                <%= user.email %>
-                            </a></td>
-                        <td>
-                            <form action="/admin/update-role" method="post" class="manage-user-form">
-                                <input type="hidden" name="id" value="<%= user.id %>" />
-                                <select name="role" id="role">
-                                    <option value="SUPER ADMIN" <%=user.role==='SUPER ADMIN' ? 'selected' : '' %> >SUPER
-                                        ADMIN</option>
-                                    <option value="ADMIN" <%=user.role==='ADMIN' ? 'selected' : '' %>>ADMIN
-                                    </option>
-                                    <option value="USER" <%=user.role==='USER' ? 'selected' : '' %>>USER</option>
-                                </select>
-                                <input type="submit" value="update">
-                            </form>
-                        </td>
-                    </tr>
-                    <% }) %>
-            </tbody>
-        </table>
-
+            <table class="table" style="margin: 0 auto;">
+                <thead>
+                    <th>id</th>
+                    <th>email</th>
+                    <th>role</th>
+                </thead>
+                <tbody>
+                    <% users.forEach(user=> { %>
+                        <tr>
+                            <td>
+                                <%= user.id %>
+                            </td>
+                            <td><a href="/admin/user/<%= user.id %>">
+                                    <%= user.email %>
+                                </a></td>
+                            <td>
+                                <form action="/admin/update-role" method="post" class="manage-user-form">
+                                    <input type="hidden" name="id" value="<%= user.id %>" />
+                                    <select name="role" id="role">
+                                        <option value="SUPER ADMIN" <%=user.role==='SUPER ADMIN' ? 'selected' : '' %>
+                                            >SUPER
+                                            ADMIN</option>
+                                        <option value="ADMIN" <%=user.role==='ADMIN' ? 'selected' : '' %>>ADMIN
+                                        </option>
+                                        <option value="USER" <%=user.role==='USER' ? 'selected' : '' %>>USER</option>
+                                    </select>
+                                    <input type="submit" value="update">
+                                </form>
+                            </td>
+                        </tr>
+                        <% }) %>
+                </tbody>
+            </table>
+        </div>
     </div>
-<%- include ('layouts/footer') %>
+    <%- include ('layouts/footer') %>

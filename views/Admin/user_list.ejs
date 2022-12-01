@@ -1,0 +1,42 @@
+<%- include ('../layouts/header') %>
+
+    <div style="display: flex;margin:0 5%;">
+        <div>
+            <%- include ('../layouts/admin_manu.ejs') %>
+        </div>
+        <div style="width: 70%;margin: 0 50px;text-align: center;">
+            <h1 class="table">User Details</h1>
+
+            <table class="table" style="margin: 0 auto;">
+                <thead>
+                    <th>Id</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </thead>
+                <tbody>
+                    <% users.forEach(user=> { %>
+                        <tr>
+                            <td>
+                                <%= user.id %>
+                            </td>
+                            <td style="text-align: left;">
+                                <%= user.email %>
+                            </td>
+                            <td style="text-align: left;">
+                                <%= user.role %>
+                            </td>
+                            <td style="text-align: center;">
+                                <button class="buttonType"><a style="color: #fff;" href="/admin/user-edit/<%= user.id %>"> Edit</a></button>
+                            </td>
+                            <td style="text-align: center;">
+                                <button class="buttonType"><a style="color: #fff;" href="/admin/user-delete/<%= user.id %>"> Delete</a></button>
+                            </td>
+                        </tr>
+                        <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <%- include ('../layouts/footer') %>

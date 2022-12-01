@@ -59,6 +59,7 @@ router.post(
             }
             const user = new User(req.body);
             await user.save();
+            
             req.flash(
                 'success',
                 `${user.email} registered succesfully, you can now login`
