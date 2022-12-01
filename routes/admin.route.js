@@ -41,7 +41,7 @@ router.post(
                 errors.array().forEach((error) => {
                     req.flash('error', error.msg);
                 });
-                res.render('register', {
+                res.render('Admin/add_user_form', {
                     email: req.body.email,
                     messages: req.flash(),
                 });
@@ -60,7 +60,7 @@ router.post(
             
             req.flash(
                 'success',
-                `${user.email} registered succesfully, you can now login`
+                `${user.email} registered succesfully`
             );
             res.redirect('/admin/add-user');
         } catch (error) {
