@@ -1,0 +1,28 @@
+<!-- Links (sit on top) -->
+<div class="w3-top">
+  <div class="w3-row w3-small w3-light-grey">
+    <div class="w3-col s3">
+      <a href="/" class="w3-button w3-block">Home</a>
+    </div>
+    <% if (user) { %>
+      <div class="w3-col s3">
+        <a href="/user/profile" class="w3-button w3-block">Profile</a>
+      </div>
+      <% if (user.role==='SUPER ADMIN' ) { %>
+        <div class="w3-col s3">
+          <a href="/admin/users" class="w3-button w3-block">Manage Users</a>
+        </div>
+        <% } %>
+          <div class="w3-col s3">
+            <a href="/auth/logout" class="w3-button w3-block">Logout</a>
+          </div>
+          <% } else { %>
+            <div class="w3-col s3">
+              <a href="/auth/register" class="w3-button w3-block">Register</a>
+            </div>
+            <div class="w3-col s3">
+              <a href="/auth/login" class="w3-button w3-block">Login</a>
+            </div>
+            <% } %>
+  </div>
+</div>
