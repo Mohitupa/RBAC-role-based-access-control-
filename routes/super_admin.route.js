@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 const User = require('../models/user.model');
 const router = require('express').Router();
 const {roles} = require('../utils/constants')
-const { registerValidator } = require('../utils/validators');
 
 router.get('/users', async (req, res, next) => {
     try {
@@ -14,12 +13,13 @@ router.get('/users', async (req, res, next) => {
     }
 })
 
-router.delete('/user-delete/:id', async (req, res, next) => {
+router.get('/user-delete/:id', async (req, res, next) => {
     try {
         const { id } = req.params;
+        console.log(id);
         if (!mongoose.Types.ObjectId.isValid(id)) {
             req.flash('error', 'Invalid Id!');
-            res.redirect('/admin/users');
+            res.redirect('/super-admin/users');
             return;
         }
         if (req.user.id === id) {
@@ -30,17 +30,7 @@ router.delete('/user-delete/:id', async (req, res, next) => {
             return res.redirect('back');
         }
         
-        let p = await User.findById(id); 
-        console.log(p);
-        if(p.role = 'SUPER ADMIN') {
-            req.flash(
-                'error',
-                `You don't have permission to delete Super Admin.`
-            );
-            res.redirect("/admin/users-details");
-        }
-
-        if(req.user.role == "ADMIN") {
+        if(req.user.role == "SUPER ADMIN") {
             await User.deleteOne({ _id: id });
             req.flash("success","User Deleted Succesfully")
             res.redirect("/admin/users-details");
