@@ -9,7 +9,7 @@ const session = require('express-session');
 const connectFlash = require('connect-flash');
 const passport = require('passport');
 const connectMongo = require('connect-mongo');
-const {ensureLoggedIn} = require('connect-ensure-login');
+const { ensureLoggedIn } = require('connect-ensure-login');
 const { roles } = require('./utils/constants')
 
 const app = express();
@@ -62,11 +62,19 @@ app.use(
     ensureLoggedIn({ redirectTo: "/auth/login" }),
     require('./routes/user')
 );
+
 app.use(
     '/admin',
     ensureLoggedIn({ redirectTo: "/auth/login" }),
-    ensureSuperAdmin,
+    ensureAdmin,
     require('./routes/admin.route')
+);
+
+app.use(
+    '/super-admin',
+    ensureLoggedIn({ redirectTo: "/auth/login" }),
+    ensureSuperAdmin,
+    require('./routes/super_admin.route')
 );
 
 app.use((req, res, next) => {
@@ -110,10 +118,10 @@ function ensureSuperAdmin(req, res, next) {
 }
 
 function ensureAdmin(req, res, next) {
-    if (req.user.role === roles.admin) {
-      next();
+    if (req.user.role === roles.admin || req.user.role === roles.superAdmin) {
+        next();
     } else {
-      req.flash('warning', 'you are not Authorized to see this route');
-      res.redirect('/');
+        req.flash('warning', 'you are not Authorized to see this route');
+        res.redirect('/');
     }
-  }
+}

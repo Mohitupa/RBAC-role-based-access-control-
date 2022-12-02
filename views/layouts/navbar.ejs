@@ -10,9 +10,14 @@
       </div>
       <% if (user.role==='SUPER ADMIN' ) { %>
         <div class="w3-col s3">
-          <a href="/admin/users" class="w3-button w3-block">Super Admin</a>
+          <a href="/super-admin/users" class="w3-button w3-block">Super Admin</a>
         </div>
         <% } %>
+        <% if (user.role==='ADMIN' ) { %>
+          <div class="w3-col s3">
+            <a href="/admin/users-details" class="w3-button w3-block">Admin</a>
+          </div>
+          <% } %>
           <div class="w3-col s3">
             <a href="/auth/logout" class="w3-button w3-block">Logout</a>
           </div>
