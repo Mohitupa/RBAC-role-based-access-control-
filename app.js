@@ -113,7 +113,7 @@ function ensureSuperAdmin(req, res, next) {
         next();
     } else {
         req.flash('warning', 'you are not Authorized to see this route');
-        res.redirect('/');
+        res.redirect('back');
     }
 }
 
@@ -122,6 +122,6 @@ function ensureAdmin(req, res, next) {
         next();
     } else {
         req.flash('warning', 'you are not Authorized to see this route');
-        res.redirect('/');
+        res.redirect('back');
     }
 }

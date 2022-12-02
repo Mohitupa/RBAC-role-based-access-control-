@@ -14,6 +14,47 @@ router.get('/users', async (req, res, next) => {
     }
 })
 
+router.delete('/user-delete/:id', async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            req.flash('error', 'Invalid Id!');
+            res.redirect('/admin/users');
+            return;
+        }
+        if (req.user.id === id) {
+            req.flash(
+                'error',
+                'Admins cannot remove themselves from Admin, ask Super admin.'
+            );
+            return res.redirect('back');
+        }
+        
+        let p = await User.findById(id); 
+        console.log(p);
+        if(p.role = 'SUPER ADMIN') {
+            req.flash(
+                'error',
+                `You don't have permission to delete Super Admin.`
+            );
+            res.redirect("/admin/users-details");
+        }
+
+        if(req.user.role == "ADMIN") {
+            await User.deleteOne({ _id: id });
+            req.flash("success","User Deleted Succesfully")
+            res.redirect("/admin/users-details");
+        } 
+        req.flash(
+            'error',
+            `You don't have permission to delete users.`
+        );
+        res.redirect("/admin/users-details");
+    } catch (error) {
+        next(error);
+    }
+});
+
 router.post('/update-role', async (req, res, next) => {
     try {
         const { id, role } = req.body;
